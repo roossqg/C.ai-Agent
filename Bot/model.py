@@ -1,7 +1,8 @@
 from PyCharacterAI import *
 from PyCharacterAI.exceptions import SessionClosedError
 import asyncio
-from PyCharacterAI.types import TurnCandidate
+import playsound
+import os
 
 token="YOUR TOKEN HERE"
 char_id="YOUR C.AI CHARACTER ID HERE"
@@ -42,10 +43,15 @@ async def main():
             speech = await client.utils.generate_speech(chat_id,f,lk,voice_id="c.ai voice id")
 
         # It will return bytes, so we can use it for example like this:
-            filepath = "voice.mp3"
+
+            filepath = "/../voice.mp3" # audio path 
 
             with open(filepath, 'wb') as f:
                 f.write(speech)
+
+            playsound.playsound(filepath)
+            
+            os.remove(filepath) # You can also add this before filepath variable for keep your audio on directory
 
 
 
